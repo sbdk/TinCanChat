@@ -16,6 +16,12 @@
 		BEB77CD21D0B74F600281E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB77CD01D0B74F600281E21 /* LaunchScreen.storyboard */; };
 		BEB77CDD1D0B74F600281E21 /* TinCan_ChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB77CDC1D0B74F600281E21 /* TinCan_ChatTests.swift */; };
 		BEB77CE81D0B74F600281E21 /* TinCan_ChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB77CE71D0B74F600281E21 /* TinCan_ChatUITests.swift */; };
+		BEB8E3A51D0D168E00ED0A15 /* ChatRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */; };
+		BEB8E3A71D0D187F00ED0A15 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */; };
+		BEB8E3AC1D0D1A2A00ED0A15 /* ChatPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3AB1D0D1A2A00ED0A15 /* ChatPeer.swift */; };
+		BEB8E3AE1D0D1A3A00ED0A15 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3AD1D0D1A3A00ED0A15 /* ChatMessage.swift */; };
+		BEB8E3B11D0D1A5000ED0A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3AF1D0D1A5000ED0A15 /* Model.xcdatamodeld */; };
+		BEB8E3B31D0D1C0700ED0A15 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3B21D0D1C0700ED0A15 /* CoreDataStackManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,12 @@
 		BEB77CE31D0B74F600281E21 /* TinCan ChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TinCan ChatUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB77CE71D0B74F600281E21 /* TinCan_ChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinCan_ChatUITests.swift; sourceTree = "<group>"; };
 		BEB77CE91D0B74F600281E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRecordViewController.swift; sourceTree = "<group>"; };
+		BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		BEB8E3AB1D0D1A2A00ED0A15 /* ChatPeer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPeer.swift; sourceTree = "<group>"; };
+		BEB8E3AD1D0D1A3A00ED0A15 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		BEB8E3B01D0D1A5000ED0A15 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		BEB8E3B21D0D1C0700ED0A15 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,7 @@
 		BEB77CC41D0B74F600281E21 /* TinCan Chat */ = {
 			isa = PBXGroup;
 			children = (
+				BEB8E3AA1D0D1A1700ED0A15 /* CoreData */,
 				BEB77CC51D0B74F600281E21 /* AppDelegate.swift */,
 				BEB77CC71D0B74F600281E21 /* FirstViewController.swift */,
 				BEB77CC91D0B74F600281E21 /* SecondViewController.swift */,
@@ -109,6 +122,8 @@
 				BEB77CD01D0B74F600281E21 /* LaunchScreen.storyboard */,
 				BEB77CD31D0B74F600281E21 /* Info.plist */,
 				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
+				BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */,
+				BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */,
 			);
 			path = "TinCan Chat";
 			sourceTree = "<group>";
@@ -129,6 +144,17 @@
 				BEB77CE91D0B74F600281E21 /* Info.plist */,
 			);
 			path = "TinCan ChatUITests";
+			sourceTree = "<group>";
+		};
+		BEB8E3AA1D0D1A1700ED0A15 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BEB8E3AB1D0D1A2A00ED0A15 /* ChatPeer.swift */,
+				BEB8E3AD1D0D1A3A00ED0A15 /* ChatMessage.swift */,
+				BEB8E3AF1D0D1A5000ED0A15 /* Model.xcdatamodeld */,
+				BEB8E3B21D0D1C0700ED0A15 /* CoreDataStackManager.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,8 +288,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB8E3AE1D0D1A3A00ED0A15 /* ChatMessage.swift in Sources */,
 				BE277BE21D0B780D00288067 /* SettingViewController.swift in Sources */,
+				BEB8E3B31D0D1C0700ED0A15 /* CoreDataStackManager.swift in Sources */,
+				BEB8E3A71D0D187F00ED0A15 /* BrowserViewController.swift in Sources */,
 				BEB77CCA1D0B74F600281E21 /* SecondViewController.swift in Sources */,
+				BEB8E3A51D0D168E00ED0A15 /* ChatRecordViewController.swift in Sources */,
+				BEB8E3AC1D0D1A2A00ED0A15 /* ChatPeer.swift in Sources */,
+				BEB8E3B11D0D1A5000ED0A15 /* Model.xcdatamodeld in Sources */,
 				BEB77CC61D0B74F600281E21 /* AppDelegate.swift in Sources */,
 				BEB77CC81D0B74F600281E21 /* FirstViewController.swift in Sources */,
 			);
@@ -410,7 +442,7 @@
 				INFOPLIST_FILE = "TinCan Chat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftyl.TinCan-Chat";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftyl.TinCanChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -422,7 +454,7 @@
 				INFOPLIST_FILE = "TinCan Chat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftyl.TinCan-Chat";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftyl.TinCanChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -513,6 +545,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BEB8E3AF1D0D1A5000ED0A15 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BEB8E3B01D0D1A5000ED0A15 /* Model.xcdatamodel */,
+			);
+			currentVersion = BEB8E3B01D0D1A5000ED0A15 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BEB77CBA1D0B74F600281E21 /* Project object */;
 }
