@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		BE277BE21D0B780D00288067 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE277BE11D0B780D00288067 /* SettingViewController.swift */; };
 		BEB77CC61D0B74F600281E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB77CC51D0B74F600281E21 /* AppDelegate.swift */; };
-		BEB77CC81D0B74F600281E21 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB77CC71D0B74F600281E21 /* FirstViewController.swift */; };
-		BEB77CCA1D0B74F600281E21 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB77CC91D0B74F600281E21 /* SecondViewController.swift */; };
 		BEB77CCD1D0B74F600281E21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB77CCB1D0B74F600281E21 /* Main.storyboard */; };
 		BEB77CCF1D0B74F600281E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB77CCE1D0B74F600281E21 /* Assets.xcassets */; };
 		BEB77CD21D0B74F600281E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB77CD01D0B74F600281E21 /* LaunchScreen.storyboard */; };
@@ -22,6 +20,8 @@
 		BEB8E3AE1D0D1A3A00ED0A15 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3AD1D0D1A3A00ED0A15 /* ChatMessage.swift */; };
 		BEB8E3B11D0D1A5000ED0A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3AF1D0D1A5000ED0A15 /* Model.xcdatamodeld */; };
 		BEB8E3B31D0D1C0700ED0A15 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3B21D0D1C0700ED0A15 /* CoreDataStackManager.swift */; };
+		BEB8E3B51D0D1FF700ED0A15 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB8E3B41D0D1FF700ED0A15 /* MCManager.swift */; };
+		BEE68EC31D0D329F00ECD89F /* PeerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE68EC21D0D329F00ECD89F /* PeerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +45,6 @@
 		BE277BE11D0B780D00288067 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		BEB77CC21D0B74F600281E21 /* TinCan Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TinCan Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB77CC51D0B74F600281E21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BEB77CC71D0B74F600281E21 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		BEB77CC91D0B74F600281E21 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		BEB77CCC1D0B74F600281E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEB77CCE1D0B74F600281E21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEB77CD11D0B74F600281E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +61,8 @@
 		BEB8E3AD1D0D1A3A00ED0A15 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		BEB8E3B01D0D1A5000ED0A15 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BEB8E3B21D0D1C0700ED0A15 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		BEB8E3B41D0D1FF700ED0A15 /* MCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
+		BEE68EC21D0D329F00ECD89F /* PeerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +113,9 @@
 		BEB77CC41D0B74F600281E21 /* TinCan Chat */ = {
 			isa = PBXGroup;
 			children = (
+				BEB8E3B41D0D1FF700ED0A15 /* MCManager.swift */,
 				BEB8E3AA1D0D1A1700ED0A15 /* CoreData */,
 				BEB77CC51D0B74F600281E21 /* AppDelegate.swift */,
-				BEB77CC71D0B74F600281E21 /* FirstViewController.swift */,
-				BEB77CC91D0B74F600281E21 /* SecondViewController.swift */,
 				BEB77CCB1D0B74F600281E21 /* Main.storyboard */,
 				BEB77CCE1D0B74F600281E21 /* Assets.xcassets */,
 				BEB77CD01D0B74F600281E21 /* LaunchScreen.storyboard */,
@@ -124,6 +123,7 @@
 				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
 				BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */,
 				BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */,
+				BEE68EC21D0D329F00ECD89F /* PeerCell.swift */,
 			);
 			path = "TinCan Chat";
 			sourceTree = "<group>";
@@ -288,16 +288,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB8E3B51D0D1FF700ED0A15 /* MCManager.swift in Sources */,
 				BEB8E3AE1D0D1A3A00ED0A15 /* ChatMessage.swift in Sources */,
 				BE277BE21D0B780D00288067 /* SettingViewController.swift in Sources */,
 				BEB8E3B31D0D1C0700ED0A15 /* CoreDataStackManager.swift in Sources */,
 				BEB8E3A71D0D187F00ED0A15 /* BrowserViewController.swift in Sources */,
-				BEB77CCA1D0B74F600281E21 /* SecondViewController.swift in Sources */,
+				BEE68EC31D0D329F00ECD89F /* PeerCell.swift in Sources */,
 				BEB8E3A51D0D168E00ED0A15 /* ChatRecordViewController.swift in Sources */,
 				BEB8E3AC1D0D1A2A00ED0A15 /* ChatPeer.swift in Sources */,
 				BEB8E3B11D0D1A5000ED0A15 /* Model.xcdatamodeld in Sources */,
 				BEB77CC61D0B74F600281E21 /* AppDelegate.swift in Sources */,
-				BEB77CC81D0B74F600281E21 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

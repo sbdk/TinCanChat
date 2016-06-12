@@ -229,8 +229,17 @@
                             <outlet property="delegate" destination="d6o-hO-SxY" id="6v3-hZ-aMr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Q8D-PT-s0m"/>
+                    <navigationItem key="navigationItem" id="Q8D-PT-s0m">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="K3r-Oi-a60">
+                            <connections>
+                                <action selector="browserButtonTouched:" destination="d6o-hO-SxY" id="d9u-Zj-zyT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="browserButton" destination="K3r-Oi-a60" id="Tct-eb-Jdk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2OL-UF-SSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -239,7 +248,7 @@
         <!--Browser View Controller-->
         <scene sceneID="PNr-CH-a4l">
             <objects>
-                <viewController id="RTm-Rp-4ht" customClass="BrowserViewController" customModule="TinCan_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="browserViewController" id="RTm-Rp-4ht" customClass="BrowserViewController" customModule="TinCan_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uKU-jY-xZZ"/>
                         <viewControllerLayoutGuide type="bottom" id="e6t-v3-fwE"/>
@@ -247,9 +256,105 @@
                     <view key="view" contentMode="scaleToFill" id="Lyn-rf-0tb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axb-fU-na5">
+                                <rect key="frame" x="114.5" y="79" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZWM-vi-adh">
+                                <rect key="frame" x="215.5" y="79" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXS-OM-uat">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8Ch-WZ-WXw"/>
+                                    <barButtonItem title="Dismiss" id="2ap-Ph-gYX">
+                                        <connections>
+                                            <action selector="cancelButtonTouched:" destination="RTm-Rp-4ht" id="aVH-kb-Jxu"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="shd-LA-2f2"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Ib-Lh-TRV">
+                                <rect key="frame" x="0.0" y="120" width="320" height="354"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="browserTableCell" id="gJU-Uk-qXb" customClass="PeerCell" customModule="TinCan_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gJU-Uk-qXb" id="hAN-Yy-8ga">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch to connect" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fc0-Ba-5A2">
+                                                    <rect key="frame" x="187" y="13" width="120" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="7aj-dk-Yf3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the other party name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRA-N8-nHN">
+                                                    <rect key="frame" x="13" y="5" width="160" height="33.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="160" id="mXk-QW-5Kr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KRA-N8-nHN" firstAttribute="leading" secondItem="hAN-Yy-8ga" secondAttribute="leadingMargin" constant="5" id="5pd-kv-Gg9"/>
+                                                <constraint firstItem="KRA-N8-nHN" firstAttribute="centerY" secondItem="hAN-Yy-8ga" secondAttribute="centerY" id="6G7-Hc-5Kl"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fc0-Ba-5A2" secondAttribute="trailing" constant="5" id="rce-Fe-Zq0"/>
+                                                <constraint firstItem="fc0-Ba-5A2" firstAttribute="centerY" secondItem="hAN-Yy-8ga" secondAttribute="centerY" id="uDr-Dt-tQf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="connectStatusLabel" destination="fc0-Ba-5A2" id="6Xs-d4-F2d"/>
+                                            <outlet property="foundPeerLabel" destination="KRA-N8-nHN" id="RvJ-XR-pAt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZWM-vi-adh" firstAttribute="top" secondItem="axb-fU-na5" secondAttribute="top" id="0uC-N3-CZe"/>
+                            <constraint firstItem="3Ib-Lh-TRV" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leadingMargin" id="FzW-Nq-L6j"/>
+                            <constraint firstItem="axb-fU-na5" firstAttribute="centerX" secondItem="Lyn-rf-0tb" secondAttribute="centerX" id="IAe-cO-06Z"/>
+                            <constraint firstItem="3Ib-Lh-TRV" firstAttribute="top" secondItem="uKU-jY-xZZ" secondAttribute="bottom" constant="100" id="OOJ-dV-MHT"/>
+                            <constraint firstItem="3Ib-Lh-TRV" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leading" id="QTx-Po-Kcv"/>
+                            <constraint firstItem="ZWM-vi-adh" firstAttribute="leading" secondItem="axb-fU-na5" secondAttribute="trailing" constant="10" id="Z9W-Rn-GUf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Ib-Lh-TRV" secondAttribute="trailing" id="aYf-cc-X2n"/>
+                            <constraint firstAttribute="trailing" secondItem="3Ib-Lh-TRV" secondAttribute="trailing" id="gmG-VT-MDT"/>
+                            <constraint firstItem="e6t-v3-fwE" firstAttribute="top" secondItem="3Ib-Lh-TRV" secondAttribute="bottom" constant="50" id="jpj-mQ-9q5"/>
+                            <constraint firstAttribute="trailing" secondItem="sXS-OM-uat" secondAttribute="trailing" id="ool-lL-EjB"/>
+                            <constraint firstItem="3Ib-Lh-TRV" firstAttribute="top" secondItem="axb-fU-na5" secondAttribute="bottom" constant="20" id="s1S-al-1sS"/>
+                            <constraint firstItem="sXS-OM-uat" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leading" id="vBN-G3-n1i"/>
+                            <constraint firstItem="sXS-OM-uat" firstAttribute="top" secondItem="3Ib-Lh-TRV" secondAttribute="bottom" constant="50" id="vKM-bo-bS4"/>
+                            <constraint firstItem="e6t-v3-fwE" firstAttribute="top" secondItem="sXS-OM-uat" secondAttribute="bottom" id="woi-RQ-qzO"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="FzW-Nq-L6j"/>
+                                <exclude reference="aYf-cc-X2n"/>
+                                <exclude reference="jpj-mQ-9q5"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="browserActivityIndicator" destination="ZWM-vi-adh" id="d5T-cc-xN8"/>
+                        <outlet property="browserTableView" destination="3Ib-Lh-TRV" id="LRx-B9-pQV"/>
+                        <outlet property="browserViewTopLabel" destination="axb-fU-na5" id="8sf-Br-gUF"/>
+                        <outlet property="dismissButton" destination="2ap-Ph-gYX" id="0JG-qh-d6r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TfO-yC-pQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
