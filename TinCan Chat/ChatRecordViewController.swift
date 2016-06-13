@@ -25,7 +25,6 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDelegate.mcManager.advertiser.startAdvertisingPeer()
         
         let backgroundImage = UIImage(named: "BeachEffect")
         let imageView = UIImageView(image: backgroundImage)
@@ -50,6 +49,8 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
             } else {
                 appDelegate.mcManager.advertiser.stopAdvertisingPeer()
             }
+        } else {
+            appDelegate.mcManager.advertiser.startAdvertisingPeer()
         }
         
         //Put not-so-urgent task into background queue
@@ -67,18 +68,25 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     
     /***  Implemente tableView delegate  ***/
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return (fetchedRequestController.sections?.count)!
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.mcManager.connectedPeers.count
+        let sectionInfo = fetchedRequestController.sections![section]
+        return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tableViewCell", forIndexPath: indexPath) as! PeerCell
-        let peerID = (appDelegate.mcManager.connectedPeers)[indexPath.row] as! MCPeerID
-        cell.connectedPeerLabel!.text = peerID.displayName as String
-        cell.statusLabel!.text = "connected 😎"
+        let storedPeer = fetchedRequestController.objectAtIndexPath(indexPath) as! ChatPeer
+        cell.connectedPeerLabel!.text = storedPeer.peerName
+        
+        //Check whether this peer is currently connected
+        if appDelegate.mcManager.connectedPeers.containsObject(storedPeer.peerID){
+            cell.statusLabel!.text = "connected 😎"
+        } else {
+            cell.statusLabel!.text = "Not connected"
+        }
         
         //Config badgeLabel
         cell.badgeLabel.hidden = true
@@ -88,8 +96,8 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         cell.badgeLabel.textColor = UIColor.whiteColor()
         
         //Check whether this peer has unread messages count stored in userDefault
-        if defaults.valueForKey(peerID.displayName) != nil {
-            cell.badgeLabel.text = String(defaults.valueForKey(peerID.displayName)!)
+        if defaults.valueForKey(storedPeer.peerName) != nil {
+            cell.badgeLabel.text = String(defaults.valueForKey(storedPeer.peerName)!)
             cell.badgeLabel.hidden = false
         }
         return cell
@@ -104,23 +112,20 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let peerID = (appDelegate.mcManager.connectedPeers)[indexPath.row] as! MCPeerID
+        let selectedPeer = fetchedRequestController.objectAtIndexPath(indexPath) as! ChatPeer
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        //Perform a predicated fetch with peerID info, get the associated ChatPeer
-        let fetchController = peerFetchController(peerID.displayName)
-        do{
-            try fetchController.performFetch()
-        } catch{print(error)}
-        let selectedPeer = (fetchController.fetchedObjects as! [ChatPeer]).first!
-        
         //Reset unread message count for this peerID
-        defaults.setValue(nil, forKey: peerID.displayName)
+        defaults.setValue(nil, forKey: selectedPeer.peerName)
         
         //Prepare and present the ChatViewController
         let controller = storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
         controller.chatPeer = selectedPeer
-        controller.readOnly = false
+        if appDelegate.mcManager.connectedPeers.containsObject(selectedPeer.peerID){
+            controller.readOnly = false
+        } else {
+            controller.readOnly = true
+        }
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -142,7 +147,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     }
     
     override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "Disconnect"
+        return "Delete"
     }
 
 
@@ -216,7 +221,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
                 connectedPeer.lastChatTime = NSDate()
                 CoreDataStackManager.sharedInstance().saveContext()
             }
-                //If the connected peer is a new peer, add this ChatPeer object into CoreData
+            //If the connected peer is a new peer, add this ChatPeer object into CoreData
             else {
                 let newPeer = ChatPeer(newPeerID: peerID, messagesArray: nil, context: self.sharedContext)
                 self.sharedContext.insertObject(newPeer)

@@ -122,9 +122,9 @@
 				BEB77CCE1D0B74F600281E21 /* Assets.xcassets */,
 				BEB77CD01D0B74F600281E21 /* LaunchScreen.storyboard */,
 				BEB77CD31D0B74F600281E21 /* Info.plist */,
-				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
 				BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */,
 				BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */,
+				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
 				BEE68EC21D0D329F00ECD89F /* PeerCell.swift */,
 				BE45354D1D0E77090042E28D /* ConvenientView.swift */,
 			);

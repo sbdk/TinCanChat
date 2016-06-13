@@ -75,6 +75,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEf-Ld-Ayd">
                                                     <rect key="frame" x="258" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleVisibility:" destination="8Lp-FE-qPO" eventType="valueChanged" id="hlS-lp-YG2"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visible to others?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFX-uG-zqm">
                                                     <rect key="frame" x="16" y="11" width="132" height="21"/>

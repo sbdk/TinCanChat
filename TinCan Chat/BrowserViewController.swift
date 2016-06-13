@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import MultipeerConnectivity
 
 class BrowserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MCManagerBrowserDelegate, MCManagerSessionDelegate {
@@ -110,7 +111,7 @@ class BrowserViewController: UIViewController, UITableViewDataSource, UITableVie
     func connectedWithPeer(peerID: MCPeerID) {
         cellDetailText = "connected 😎"
         print(cellDetailText)
-        //When connect success, dismiss the browserView
+        //When connect success,dismiss the browserView
         dispatch_async(dispatch_get_main_queue()){
             self.dismissViewControllerAnimated(true, completion: nil)
         }
