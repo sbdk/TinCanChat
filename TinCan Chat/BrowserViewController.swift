@@ -135,4 +135,53 @@ class BrowserViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func cancelButtonTouched(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    /*** CoreData Implementation ***/
+    
+//    //Set lazy variable for CoreData
+//    lazy var sharedContext = {
+//        return CoreDataStackManager.sharedInstance().managedObjectContext
+//    }()
+//    
+//    //Convenient function for later use, enable real-time fetch with predicate
+//    func peerFetchController(predicatePeerName: String) -> NSFetchedResultsController {
+//        let fetchRequest = NSFetchRequest(entityName: "ChatPeer")
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastChatTime", ascending: true)]
+//        fetchRequest.predicate = NSPredicate(format: "peerName == %@", predicatePeerName)
+//        let fetchedRequestController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+//        fetchedRequestController.delegate = self
+//        return fetchedRequestController
+//    }
+//    
+//    //implemente FetchedResultController Delegate Method
+//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+//        browserTableView.beginUpdates()
+//    }
+//    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+//                    atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .Insert:
+//            break
+//        case .Delete:
+//            break
+//        default:
+//            return
+//        }
+//    }
+//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType,newIndexPath: NSIndexPath?) {
+//        switch type {
+//        case .Insert:
+//            break
+//        case .Delete:
+//            break
+//        case .Update:
+//            break
+//        case .Move:
+//            break
+//        }
+//    }
+//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+//        browserTableView.endUpdates()
+//    }
+
 }

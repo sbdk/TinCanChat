@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Setting-->
@@ -189,11 +190,11 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--First-->
+        <!--Chats-->
         <scene sceneID="oNr-zV-TWd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O9k-d9-tZt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Chats" image="ChatTabIcon" selectedImage="ChatTabIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rhK-TP-0oI">
@@ -282,12 +283,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Chats" id="Q8D-PT-s0m">
-                        <barButtonItem key="leftBarButtonItem" title="DisconnectAll" id="1Kh-y9-WNZ">
+                        <barButtonItem key="leftBarButtonItem" image="DeleteLink" id="1Kh-y9-WNZ">
                             <connections>
                                 <action selector="disconnectAllButtonTouched:" destination="d6o-hO-SxY" id="Iv2-Zr-UNE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="K3r-Oi-a60">
+                        <barButtonItem key="rightBarButtonItem" image="Search" id="K3r-Oi-a60">
                             <connections>
                                 <action selector="browserButtonTouched:" destination="d6o-hO-SxY" id="d9u-Zj-zyT"/>
                             </connections>
@@ -315,39 +316,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ha9-MB-2CQ">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="kqp-aK-4E7"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <items/>
                             </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er " translatesAutoresizingMaskIntoConstraints="NO" id="5QL-Up-JDO">
-                                <rect key="frame" x="36" y="523" width="248" height="40"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QL-Up-JDO">
+                                <rect key="frame" x="32" y="529" width="256" height="34"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="0zt-A2-dJv"/>
-                                    <constraint firstAttribute="height" constant="40" id="okb-yd-4wu"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="0zt-A2-dJv"/>
-                                    </mask>
-                                </variation>
                             </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bCl-Lf-Bag">
-                                <rect key="frame" x="0.0" y="20" width="320" height="498"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Wwh-OL-Rz8" customClass="ChatReceivedMessageCell" customModule="TinCan_Chat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="receivedMessageCell" id="Wwh-OL-Rz8" customClass="ChatReceivedMessageCell" customModule="TinCan_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wwh-OL-Rz8" id="LdJ-Y7-aZf">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LPh-Ke-86L">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LPh-Ke-86L">
                                                     <rect key="frame" x="13" y="2" width="240" height="37.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -373,19 +363,20 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="receivedTextView" destination="LPh-Ke-86L" id="4hK-yo-M72"/>
                                             <outlet property="receivedTextViewWidth" destination="lp3-ge-qTt" id="DU9-V5-3Os"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gpJ-5D-cMC" customClass="ChatSentMessageCell" customModule="TinCan_Chat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sentMessageCell" id="gpJ-5D-cMC" customClass="ChatSentMessageCell" customModule="TinCan_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gpJ-5D-cMC" id="CNU-Ou-dfz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-yj-Gkq">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-yj-Gkq">
                                                     <rect key="frame" x="67" y="3" width="240" height="37.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -407,6 +398,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="sentTextView" destination="OF1-yj-Gkq" id="hh6-fh-naO"/>
                                             <outlet property="sentTextViewWidth" destination="pC8-Fm-e0g" id="p6b-j2-xsR"/>
@@ -420,14 +412,27 @@
                             <constraint firstAttribute="trailing" secondItem="bCl-Lf-Bag" secondAttribute="trailing" id="3Ic-Bb-ANo"/>
                             <constraint firstItem="5QL-Up-JDO" firstAttribute="leading" secondItem="Xax-Mj-b6I" secondAttribute="leadingMargin" constant="20" id="65p-pt-vdb"/>
                             <constraint firstItem="Ha9-MB-2CQ" firstAttribute="top" secondItem="bCl-Lf-Bag" secondAttribute="bottom" id="7Rv-80-r8z"/>
+                            <constraint firstItem="5QL-Up-JDO" firstAttribute="top" secondItem="bCl-Lf-Bag" secondAttribute="bottom" constant="5" id="950-dK-dcn"/>
                             <constraint firstItem="bCl-Lf-Bag" firstAttribute="leading" secondItem="Xax-Mj-b6I" secondAttribute="leading" id="JJm-H6-KQU"/>
+                            <constraint firstItem="ezq-KL-sPg" firstAttribute="top" secondItem="5QL-Up-JDO" secondAttribute="bottom" constant="5" id="LR5-Xe-Qbq"/>
                             <constraint firstAttribute="trailing" secondItem="Ha9-MB-2CQ" secondAttribute="trailing" id="ViE-gz-p0i"/>
+                            <constraint firstItem="5QL-Up-JDO" firstAttribute="width" secondItem="Ha9-MB-2CQ" secondAttribute="width" multiplier="0.8" id="WEb-e1-vDY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5QL-Up-JDO" secondAttribute="trailing" constant="20" id="Yyx-C3-eqj"/>
                             <constraint firstItem="ezq-KL-sPg" firstAttribute="top" secondItem="Ha9-MB-2CQ" secondAttribute="bottom" id="fLD-eO-O49"/>
+                            <constraint firstItem="5QL-Up-JDO" firstAttribute="centerX" secondItem="Ha9-MB-2CQ" secondAttribute="centerX" id="ige-L2-fhR"/>
+                            <constraint firstItem="5QL-Up-JDO" firstAttribute="top" secondItem="Ha9-MB-2CQ" secondAttribute="bottom" constant="-45" id="m07-Sg-bM2"/>
                             <constraint firstItem="5QL-Up-JDO" firstAttribute="centerY" secondItem="Ha9-MB-2CQ" secondAttribute="centerY" id="nO6-0e-o1H"/>
                             <constraint firstItem="Ha9-MB-2CQ" firstAttribute="leading" secondItem="Xax-Mj-b6I" secondAttribute="leading" id="sFi-2Y-8hh"/>
                             <constraint firstItem="bCl-Lf-Bag" firstAttribute="top" secondItem="qUa-21-eie" secondAttribute="bottom" id="uiX-Ep-WcJ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="65p-pt-vdb"/>
+                                <exclude reference="Yyx-C3-eqj"/>
+                                <exclude reference="m07-Sg-bM2"/>
+                                <exclude reference="nO6-0e-o1H"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -554,11 +559,11 @@
             </objects>
             <point key="canvasLocation" x="1430" y="-621"/>
         </scene>
-        <!--Item-->
+        <!--Setting-->
         <scene sceneID="gg2-dB-yH4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KgC-eW-6iz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mtL-hB-04s"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="SettingTabIcon" id="mtL-hB-04s"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nIh-6e-D1i">
@@ -576,7 +581,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="ChatTabIcon" width="25" height="25"/>
+        <image name="DeleteLink" width="22" height="22"/>
+        <image name="Search" width="22" height="22"/>
+        <image name="SettingTabIcon" width="25" height="25"/>
         <image name="userDefaultIcon" width="180" height="180"/>
     </resources>
 </document>

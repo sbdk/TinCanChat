@@ -16,6 +16,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let defaults = NSUserDefaults.standardUserDefaults()
+    var temporaryContext: NSManagedObjectContext!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,6 +33,13 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         
         tableView.backgroundView = imageView
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        // Set the temporary context
+        temporaryContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        temporaryContext.persistentStoreCoordinator = sharedContext.persistentStoreCoordinator
+        
+        navigationController?.navigationBar.tintColor = UIColor.purpleColor()
+        tabBarController?.tabBar.tintColor = UIColor.purpleColor()
         
         //Perform CoreData fetch
         fetchedRequestController.delegate = self
@@ -72,15 +80,9 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     }
     
     /***  Implemente tableView delegate  ***/
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 1
-//    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let sectionInfo = fetchedRequestController.sections?[section]
         return sectionInfo?.numberOfObjects ?? 0
-        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -222,16 +224,12 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     func handleSuccessConnection(notification: NSNotification){
         let peerID = notification.object as! MCPeerID
         
-        //Perform a fetch to get stored ChatPeers
-        let fetchController = peerFetchController(peerID.displayName)
-        do{
-            try fetchController.performFetch()
-        } catch{print(error)}
-        
         dispatch_async(dispatch_get_main_queue()){
-            
+            //Perform a fetch to get stored ChatPeers
             //If the connected peer has previously stored in CoreData, update it's peerID info
-            if let connectedPeer = (fetchController.fetchedObjects as! [ChatPeer]).first {
+            if let objectInTempContext = self.customFetch(peerID.displayName){
+                let objectID = objectInTempContext.objectID
+                let connectedPeer = self.sharedContext.objectWithID(objectID) as! ChatPeer
                 connectedPeer.peerID = peerID
                 connectedPeer.lastChatTime = NSDate()
                 CoreDataStackManager.sharedInstance().saveContext()
@@ -243,6 +241,26 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
                 CoreDataStackManager.sharedInstance().saveContext()
             }
         }
+//        let fetchController = peerFetchController(peerID.displayName, context: self.temporaryContext)
+//        do{
+//            try fetchController.performFetch()
+//        } catch{print(error)}
+//        
+//        dispatch_async(dispatch_get_main_queue()){
+//            
+//            //If the connected peer has previously stored in CoreData, update it's peerID info
+//            if let connectedPeer = (fetchController.fetchedObjects as! [ChatPeer]).first {
+//                connectedPeer.peerID = peerID
+//                connectedPeer.lastChatTime = NSDate()
+//                CoreDataStackManager.sharedInstance().saveContext()
+//            }
+//                //If the connected peer is a new peer, add this ChatPeer object into CoreData
+//            else {
+//                let newPeer = ChatPeer(newPeerID: peerID, messagesArray: nil, context: self.sharedContext)
+//                self.sharedContext.insertObject(newPeer)
+//                CoreDataStackManager.sharedInstance().saveContext()
+//            }
+//        }
     }
     
     //Reaction fucntion used for received Message Notification
@@ -255,11 +273,14 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         let fromPeer = receivedDataDictionary["fromPeer"] as! MCPeerID
         
         //Perform a fetch to get associated ChatPeer object
-        let fetchController = peerFetchController(fromPeer.displayName)
-        do{
-            try fetchController.performFetch()
-        } catch{print(error)}
-        let sourcePeer = (fetchController.fetchedObjects as! [ChatPeer]).first!
+        let objectInTempContext = customFetch(fromPeer.displayName)!
+        let objectID = objectInTempContext.objectID
+        let sourcePeer = sharedContext.objectWithID(objectID) as! ChatPeer
+//        let fetchController = peerFetchController(fromPeer.displayName, context: self.temporaryContext)
+//        do{
+//            try fetchController.performFetch()
+//        } catch{print(error)}
+//        let sourcePeer = (fetchController.fetchedObjects as! [ChatPeer]).first!
         
         //Update unread message count for specific peer and save this info into userDefault
         dispatch_async(dispatch_get_main_queue()){
@@ -309,13 +330,25 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     }()
     
     //Convenient function for later use, enable real-time fetch with predicate
-    func peerFetchController(predicatePeerName: String) -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest(entityName: "ChatPeer")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastChatTime", ascending: true)]
-        fetchRequest.predicate = NSPredicate(format: "peerName == %@", predicatePeerName)
-        let fetchedRequestController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedRequestController.delegate = self
-        return fetchedRequestController
+//    func peerFetchController(predicatePeerName: String, context: NSManagedObjectContext) -> NSFetchedResultsController {
+//        let fetchRequest = NSFetchRequest(entityName: "ChatPeer")
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastChatTime", ascending: true)]
+//        fetchRequest.predicate = NSPredicate(format: "peerName == %@", predicatePeerName)
+//        let fetchedRequestController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//        fetchedRequestController.delegate = self
+//        return fetchedRequestController
+//    }
+    
+    func customFetch(predicatePeerName: String) -> ChatPeer? {
+        var fetchedObject = [ChatPeer]()
+        let fetch = NSFetchRequest(entityName: "ChatPeer")
+        fetch.predicate = NSPredicate(format: "peerName == %@", predicatePeerName)
+        do{
+            fetchedObject = try temporaryContext.executeFetchRequest(fetch) as! [ChatPeer]
+        } catch {
+            print(error)
+        }
+        return fetchedObject.first
     }
     
     //Convenient function for later use, enable real-time fetch with predicate
