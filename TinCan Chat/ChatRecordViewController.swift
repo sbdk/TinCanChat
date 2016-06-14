@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MultipeerConnectivity
+import AudioToolbox
 
 class ChatRecordViewController: UITableViewController, MCManagerInvitationDelegate, NSFetchedResultsControllerDelegate {
     
@@ -17,10 +18,16 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let defaults = NSUserDefaults.standardUserDefaults()
     var temporaryContext: NSManagedObjectContext!
+    var soundEffectOn: Bool!
+    var vibrationEffectOn: Bool!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        
+        //Check sound and vibration effect status
+        soundEffectOn = defaults.valueForKey("soundSwitchStatus") as? Bool ?? true
+        vibrationEffectOn = defaults.valueForKey("vibrationSwitchStatus") as? Bool ?? true
     }
     
     override func viewDidLoad() {
@@ -180,6 +187,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     //Implemente custom MCManger invitation delegate
     func invitationWasReceived(fromPeer: String, invitationHandler: (Bool, MCSession?) -> Void) {
         print("received invitatio from: \(fromPeer)")
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         
         //First config the invitation AlertView
         let alert = UIAlertController(title: "", message: "\(fromPeer) want to chat with you", preferredStyle: UIAlertControllerStyle.Alert)
@@ -241,47 +249,29 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
                 CoreDataStackManager.sharedInstance().saveContext()
             }
         }
-//        let fetchController = peerFetchController(peerID.displayName, context: self.temporaryContext)
-//        do{
-//            try fetchController.performFetch()
-//        } catch{print(error)}
-//        
-//        dispatch_async(dispatch_get_main_queue()){
-//            
-//            //If the connected peer has previously stored in CoreData, update it's peerID info
-//            if let connectedPeer = (fetchController.fetchedObjects as! [ChatPeer]).first {
-//                connectedPeer.peerID = peerID
-//                connectedPeer.lastChatTime = NSDate()
-//                CoreDataStackManager.sharedInstance().saveContext()
-//            }
-//                //If the connected peer is a new peer, add this ChatPeer object into CoreData
-//            else {
-//                let newPeer = ChatPeer(newPeerID: peerID, messagesArray: nil, context: self.sharedContext)
-//                self.sharedContext.insertObject(newPeer)
-//                CoreDataStackManager.sharedInstance().saveContext()
-//            }
-//        }
     }
     
     //Reaction fucntion used for received Message Notification
     func handleMCReceivedDataWithNotification(notification: NSNotification){
-        
+        var sourcePeer: ChatPeer!
         let receivedDataDictionary = notification.object as! [String:AnyObject]
         
+        if soundEffectOn! {
+            AudioServicesPlaySystemSound(1003)
+        }
+        if vibrationEffectOn! {
+           AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
         // Extract the data and the sender's MCPeerID from the received dictionary.
         let data = receivedDataDictionary["data"] as? NSData
         let fromPeer = receivedDataDictionary["fromPeer"] as! MCPeerID
         
-        //Perform a fetch to get associated ChatPeer object
-        let objectInTempContext = customFetch(fromPeer.displayName)!
-        let objectID = objectInTempContext.objectID
-        let sourcePeer = sharedContext.objectWithID(objectID) as! ChatPeer
-//        let fetchController = peerFetchController(fromPeer.displayName, context: self.temporaryContext)
-//        do{
-//            try fetchController.performFetch()
-//        } catch{print(error)}
-//        let sourcePeer = (fetchController.fetchedObjects as! [ChatPeer]).first!
-        
+        temporaryContext.performBlockAndWait(){
+            //Perform a fetch to get associated ChatPeer object
+            let objectInTempContext = self.customFetch(fromPeer.displayName)!
+            let objectID = objectInTempContext.objectID
+            sourcePeer = self.sharedContext.objectWithID(objectID) as! ChatPeer
+        }
         //Update unread message count for specific peer and save this info into userDefault
         dispatch_async(dispatch_get_main_queue()){
             if self.defaults.valueForKey(fromPeer.displayName) != nil {
@@ -328,16 +318,6 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     lazy var sharedContext = {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }()
-    
-    //Convenient function for later use, enable real-time fetch with predicate
-//    func peerFetchController(predicatePeerName: String, context: NSManagedObjectContext) -> NSFetchedResultsController {
-//        let fetchRequest = NSFetchRequest(entityName: "ChatPeer")
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastChatTime", ascending: true)]
-//        fetchRequest.predicate = NSPredicate(format: "peerName == %@", predicatePeerName)
-//        let fetchedRequestController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedRequestController.delegate = self
-//        return fetchedRequestController
-//    }
     
     func customFetch(predicatePeerName: String) -> ChatPeer? {
         var fetchedObject = [ChatPeer]()

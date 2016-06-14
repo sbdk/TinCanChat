@@ -35,6 +35,16 @@ class SettingViewController: UITableViewController, UITextFieldDelegate {
             let switchStatus = self.defaults.valueForKey("switchStatus") as! Bool
             visibilitySwitch.setOn(switchStatus, animated: false)
         }
+        
+        if defaults.valueForKey("soundSwitchStatus") != nil {
+            let soundSwitchStatus = self.defaults.valueForKey("soundSwitchStatus") as! Bool
+            soundSwitch.setOn(soundSwitchStatus, animated: false)
+        }
+        
+        if defaults.valueForKey("vibrationSwitchStatus") != nil {
+            let vibrationSwitchStatus = self.defaults.valueForKey("vibrationSwitchStatus") as! Bool
+            vibrationSwitch.setOn(vibrationSwitchStatus, animated: false)
+        }
 
     }
     
@@ -56,6 +66,16 @@ class SettingViewController: UITableViewController, UITextFieldDelegate {
         }
         //Whenever user changed the status of visibleSwitch, save new stauts into UserDefaults to preserve this change
         defaults.setObject(visibilitySwitch.on, forKey: "switchStatus")
+    }
+    
+    @IBAction func toggleSoundEffect(sender: AnyObject) {
+        
+        defaults.setObject(soundSwitch.on, forKey: "soundSwitchStatus")
+    }
+
+    @IBAction func toggleVibrationEffect(sender: AnyObject) {
+        
+        defaults.setObject(vibrationSwitch.on, forKey: "vibrationSwitchStatus")
     }
     
     //Implemente textField delegate method

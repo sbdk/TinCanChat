@@ -114,6 +114,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YhR-Q8-WMC">
                                                     <rect key="frame" x="258" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleSoundEffect:" destination="8Lp-FE-qPO" eventType="valueChanged" id="KBI-i8-IzY"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -133,6 +136,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3lP-xh-bdl">
                                                     <rect key="frame" x="258" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleVibrationEffect:" destination="8Lp-FE-qPO" eventType="valueChanged" id="CEX-Hp-61e"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94t-GJ-PCT">
                                                     <rect key="frame" x="16" y="11" width="69" height="21"/>
@@ -251,7 +257,7 @@
                                                 <constraint firstAttribute="width" constant="16" id="paX-zx-emg"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -469,7 +475,8 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="8Ch-WZ-WXw"/>
-                                    <barButtonItem title="Dismiss" id="2ap-Ph-gYX">
+                                    <barButtonItem title="Cancel" id="2ap-Ph-gYX">
+                                        <color key="tintColor" red="0.35686274509999999" green="0.0" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="cancelButtonTouched:" destination="RTm-Rp-4ht" id="aVH-kb-Jxu"/>
                                         </connections>
