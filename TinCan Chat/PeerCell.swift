@@ -12,25 +12,13 @@ import UIKit
 
 class PeerCell: UITableViewCell {
     
+    //BrowserViewTableCell
     @IBOutlet weak var foundPeerLabel: UILabel!
-
-
     @IBOutlet weak var connectStatusLabel: UILabel!
     
+    
+    //ChatRecord TableCell
     @IBOutlet weak var connectedPeerLabel: UILabel!
-    
     @IBOutlet weak var statusLabel: UILabel!
-    
     @IBOutlet weak var badgeLabel: UILabel!
-//    @IBOutlet weak var connectedPeerLabel: UILabel!
-//    
-//    @IBOutlet weak var statusLabel: UILabel!
-//    
-//    @IBOutlet weak var badgeLabel: UILabel!
-//    
-//    
-//    @IBOutlet weak var historyPeer: UILabel!
-//    
-//    
-//    @IBOutlet weak var historyPeerLastChatTime: UILabel!
 }

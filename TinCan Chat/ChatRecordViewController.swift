@@ -16,7 +16,6 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let defaults = NSUserDefaults.standardUserDefaults()
-    var storedPeerNames: Dictionary = [String:String]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,6 +32,12 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         
         tableView.backgroundView = imageView
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        //Perform CoreData fetch
+        fetchedRequestController.delegate = self
+        do{
+            try fetchedRequestController.performFetch()
+        } catch {print(error)}
         
         //Check whether user has previouly set custom ChatID, if so, reset MCManager session with this custom ChatID
         if let customChatID = self.defaults.valueForKey("customChatID") as? String {
@@ -67,17 +72,19 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     }
     
     /***  Implemente tableView delegate  ***/
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return (fetchedRequestController.sections?.count)!
-    }
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return 1
+//    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = fetchedRequestController.sections![section]
-        return sectionInfo.numberOfObjects
+        
+        let sectionInfo = fetchedRequestController.sections?[section]
+        return sectionInfo?.numberOfObjects ?? 0
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("tableViewCell", forIndexPath: indexPath) as! PeerCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("storedPeerCell", forIndexPath: indexPath) as! PeerCell
         let storedPeer = fetchedRequestController.objectAtIndexPath(indexPath) as! ChatPeer
         cell.connectedPeerLabel!.text = storedPeer.peerName
         
@@ -157,7 +164,15 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         controller.searchingPeer = true
         presentViewController(controller, animated: true, completion: nil)
     }
+
     
+    @IBAction func disconnectAllButtonTouched(sender: AnyObject) {
+        //Disconnect from all current peers and reset the connectedPeers array
+        appDelegate.mcManager.session.disconnect()
+        appDelegate.mcManager.connectedPeers.removeAllObjects()
+        
+        tableView.reloadData()
+    }
     /***  Implemente all custom delegate methods and notification functions  ***/
     
     //Implemente custom MCManger invitation delegate
@@ -173,7 +188,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
             
             //If user tap accept button, present a custom BroserView to show connection status
             dispatch_async(dispatch_get_main_queue()){
-                let browserViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ClosestFansBrowserViewController") as! BrowserViewController
+                let browserViewController = self.storyboard?.instantiateViewControllerWithIdentifier("browserViewController") as! BrowserViewController
                 
                 //indicate that browserView is presented for handling invitation sent from other peer, will update browserView UI accordingly
                 browserViewController.searchingPeer = false
@@ -319,9 +334,9 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
                     atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .Insert:
-            break
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
         case .Delete:
-            break
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
         default:
             return
         }

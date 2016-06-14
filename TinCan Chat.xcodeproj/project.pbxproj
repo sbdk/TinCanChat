@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BE277BE21D0B780D00288067 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE277BE11D0B780D00288067 /* SettingViewController.swift */; };
 		BE45354E1D0E77090042E28D /* ConvenientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45354D1D0E77090042E28D /* ConvenientView.swift */; };
+		BE83D8491D0F59E200C4532B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83D8481D0F59E200C4532B /* ChatViewController.swift */; };
+		BE83D84B1D0F5CEE00C4532B /* ChatSentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83D84A1D0F5CEE00C4532B /* ChatSentMessageCell.swift */; };
+		BE83D84D1D0F5D1300C4532B /* ChatReceivedMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83D84C1D0F5D1300C4532B /* ChatReceivedMessageCell.swift */; };
+		BE83D84F1D0F62C300C4532B /* KeyboardConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83D84E1D0F62C300C4532B /* KeyboardConfig.swift */; };
 		BEB77CC61D0B74F600281E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB77CC51D0B74F600281E21 /* AppDelegate.swift */; };
 		BEB77CCD1D0B74F600281E21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB77CCB1D0B74F600281E21 /* Main.storyboard */; };
 		BEB77CCF1D0B74F600281E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB77CCE1D0B74F600281E21 /* Assets.xcassets */; };
@@ -45,6 +49,10 @@
 /* Begin PBXFileReference section */
 		BE277BE11D0B780D00288067 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		BE45354D1D0E77090042E28D /* ConvenientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenientView.swift; sourceTree = "<group>"; };
+		BE83D8481D0F59E200C4532B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		BE83D84A1D0F5CEE00C4532B /* ChatSentMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSentMessageCell.swift; sourceTree = "<group>"; };
+		BE83D84C1D0F5D1300C4532B /* ChatReceivedMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatReceivedMessageCell.swift; sourceTree = "<group>"; };
+		BE83D84E1D0F62C300C4532B /* KeyboardConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardConfig.swift; sourceTree = "<group>"; };
 		BEB77CC21D0B74F600281E21 /* TinCan Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TinCan Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB77CC51D0B74F600281E21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEB77CCC1D0B74F600281E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,8 +133,12 @@
 				BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */,
 				BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */,
 				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
+				BE83D8481D0F59E200C4532B /* ChatViewController.swift */,
 				BEE68EC21D0D329F00ECD89F /* PeerCell.swift */,
+				BE83D84A1D0F5CEE00C4532B /* ChatSentMessageCell.swift */,
+				BE83D84C1D0F5D1300C4532B /* ChatReceivedMessageCell.swift */,
 				BE45354D1D0E77090042E28D /* ConvenientView.swift */,
+				BE83D84E1D0F62C300C4532B /* KeyboardConfig.swift */,
 			);
 			path = "TinCan Chat";
 			sourceTree = "<group>";
@@ -300,7 +312,11 @@
 				BEB8E3A51D0D168E00ED0A15 /* ChatRecordViewController.swift in Sources */,
 				BEB8E3AC1D0D1A2A00ED0A15 /* ChatPeer.swift in Sources */,
 				BE45354E1D0E77090042E28D /* ConvenientView.swift in Sources */,
+				BE83D84F1D0F62C300C4532B /* KeyboardConfig.swift in Sources */,
+				BE83D84B1D0F5CEE00C4532B /* ChatSentMessageCell.swift in Sources */,
 				BEB8E3B11D0D1A5000ED0A15 /* Model.xcdatamodeld in Sources */,
+				BE83D8491D0F59E200C4532B /* ChatViewController.swift in Sources */,
+				BE83D84D1D0F5D1300C4532B /* ChatReceivedMessageCell.swift in Sources */,
 				BEB77CC61D0B74F600281E21 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

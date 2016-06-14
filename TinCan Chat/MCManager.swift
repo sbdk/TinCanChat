@@ -127,9 +127,9 @@ class MCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MC
         peerID = MCPeerID.init(displayName: name)
         session = MCSession.init(peer: peerID)
         session.delegate = self
-        browser = MCNearbyServiceBrowser(peer: peerID, serviceType: "lakers-fanhub")
+        browser = MCNearbyServiceBrowser(peer: peerID, serviceType: "TinCanChat")
         browser.delegate = self
-        advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "lakers-fanhub")
+        advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "TinCanChat")
         advertiser.delegate = self
     }
     

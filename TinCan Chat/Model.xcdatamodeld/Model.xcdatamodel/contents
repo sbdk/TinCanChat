@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
-    <entity name="ChatMessage" syncable="YES">
+    <entity name="ChatMessage" representedClassName=".ChatMessage" syncable="YES">
         <attribute name="messageBody" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageSender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageTime" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="messagePeer" maxCount="1" deletionRule="Nullify" destinationEntity="ChatPeer" inverseName="chatMessages" inverseEntity="ChatPeer" syncable="YES"/>
     </entity>
-    <entity name="ChatPeer" syncable="YES">
+    <entity name="ChatPeer" representedClassName=".ChatPeer" syncable="YES">
         <attribute name="lastChatTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="peerID" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="peerName" optional="YES" attributeType="String" syncable="YES"/>

@@ -218,7 +218,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="OTC-Q5-W0v" customClass="PeerCell" customModule="TinCan_Chat" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="storedPeerCell" id="OTC-Q5-W0v" customClass="PeerCell" customModule="TinCan_Chat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OTC-Q5-W0v" id="vFB-k4-aV9">
@@ -235,7 +235,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCb-RQ-naO">
-                                            <rect key="frame" x="212" y="12" width="110" height="18"/>
+                                            <rect key="frame" x="192" y="12" width="110" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="110" id="l6l-lQ-bz8"/>
                                             </constraints>
@@ -261,7 +261,13 @@
                                         <constraint firstItem="peu-Ho-5zv" firstAttribute="top" secondItem="vFB-k4-aV9" secondAttribute="topMargin" constant="-4" id="X1a-tM-rFN"/>
                                         <constraint firstItem="vCb-RQ-naO" firstAttribute="trailing" secondItem="vFB-k4-aV9" secondAttribute="trailingMargin" constant="10" id="aEy-fc-cRV"/>
                                         <constraint firstItem="vCb-RQ-naO" firstAttribute="centerY" secondItem="vFB-k4-aV9" secondAttribute="centerY" id="gYn-JA-FF9"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="vCb-RQ-naO" secondAttribute="trailing" constant="10" id="jhr-NJ-wJj"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="aEy-fc-cRV"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="badgeLabel" destination="peu-Ho-5zv" id="aUs-rl-I6I"/>
@@ -276,7 +282,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Chats" id="Q8D-PT-s0m">
-                        <barButtonItem key="leftBarButtonItem" title="DisconnectAll" id="1Kh-y9-WNZ"/>
+                        <barButtonItem key="leftBarButtonItem" title="DisconnectAll" id="1Kh-y9-WNZ">
+                            <connections>
+                                <action selector="disconnectAllButtonTouched:" destination="d6o-hO-SxY" id="Iv2-Zr-UNE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="K3r-Oi-a60">
                             <connections>
                                 <action selector="browserButtonTouched:" destination="d6o-hO-SxY" id="d9u-Zj-zyT"/>
@@ -291,6 +301,143 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2OL-UF-SSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1041" y="-303"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="6Xy-0h-5Zq">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="7ax-1W-AP9" customClass="ChatViewController" customModule="TinCan_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qUa-21-eie"/>
+                        <viewControllerLayoutGuide type="bottom" id="ezq-KL-sPg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xax-Mj-b6I">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ha9-MB-2CQ">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="kqp-aK-4E7"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er " translatesAutoresizingMaskIntoConstraints="NO" id="5QL-Up-JDO">
+                                <rect key="frame" x="36" y="523" width="248" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="0zt-A2-dJv"/>
+                                    <constraint firstAttribute="height" constant="40" id="okb-yd-4wu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0zt-A2-dJv"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bCl-Lf-Bag">
+                                <rect key="frame" x="0.0" y="20" width="320" height="498"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Wwh-OL-Rz8" customClass="ChatReceivedMessageCell" customModule="TinCan_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wwh-OL-Rz8" id="LdJ-Y7-aZf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LPh-Ke-86L">
+                                                    <rect key="frame" x="13" y="2" width="240" height="37.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="lp3-ge-qTt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LPh-Ke-86L" firstAttribute="leading" secondItem="LdJ-Y7-aZf" secondAttribute="leadingMargin" constant="5" id="QSr-Z6-GOi"/>
+                                                <constraint firstItem="LPh-Ke-86L" firstAttribute="bottom" secondItem="LdJ-Y7-aZf" secondAttribute="bottomMargin" constant="-5" id="a36-NX-4lB"/>
+                                                <constraint firstItem="LPh-Ke-86L" firstAttribute="top" secondItem="LdJ-Y7-aZf" secondAttribute="topMargin" constant="-5" id="j5k-7u-wRP"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="LPh-Ke-86L" secondAttribute="bottom" constant="-5" id="jXz-zW-Czt"/>
+                                                <constraint firstItem="LPh-Ke-86L" firstAttribute="leading" secondItem="LdJ-Y7-aZf" secondAttribute="leadingMargin" constant="5" id="ruK-xQ-adg"/>
+                                                <constraint firstItem="LPh-Ke-86L" firstAttribute="top" secondItem="LdJ-Y7-aZf" secondAttribute="topMargin" constant="-5" id="zhR-26-Ztt"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="a36-NX-4lB"/>
+                                                    <exclude reference="ruK-xQ-adg"/>
+                                                    <exclude reference="zhR-26-Ztt"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="receivedTextView" destination="LPh-Ke-86L" id="4hK-yo-M72"/>
+                                            <outlet property="receivedTextViewWidth" destination="lp3-ge-qTt" id="DU9-V5-3Os"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gpJ-5D-cMC" customClass="ChatSentMessageCell" customModule="TinCan_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gpJ-5D-cMC" id="CNU-Ou-dfz">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-yj-Gkq">
+                                                    <rect key="frame" x="67" y="3" width="240" height="37.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="pC8-Fm-e0g"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="OF1-yj-Gkq" firstAttribute="top" secondItem="CNU-Ou-dfz" secondAttribute="topMargin" constant="-5" id="D3T-AI-Kgo"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OF1-yj-Gkq" secondAttribute="bottom" constant="-5" id="Db1-4O-Tct"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="OF1-yj-Gkq" secondAttribute="trailing" constant="5" id="YOL-kL-9eq"/>
+                                                <constraint firstItem="OF1-yj-Gkq" firstAttribute="trailing" secondItem="CNU-Ou-dfz" secondAttribute="trailingMargin" constant="5" id="o6A-Xl-Qbw"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="o6A-Xl-Qbw"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="sentTextView" destination="OF1-yj-Gkq" id="hh6-fh-naO"/>
+                                            <outlet property="sentTextViewWidth" destination="pC8-Fm-e0g" id="p6b-j2-xsR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bCl-Lf-Bag" secondAttribute="trailing" id="3Ic-Bb-ANo"/>
+                            <constraint firstItem="5QL-Up-JDO" firstAttribute="leading" secondItem="Xax-Mj-b6I" secondAttribute="leadingMargin" constant="20" id="65p-pt-vdb"/>
+                            <constraint firstItem="Ha9-MB-2CQ" firstAttribute="top" secondItem="bCl-Lf-Bag" secondAttribute="bottom" id="7Rv-80-r8z"/>
+                            <constraint firstItem="bCl-Lf-Bag" firstAttribute="leading" secondItem="Xax-Mj-b6I" secondAttribute="leading" id="JJm-H6-KQU"/>
+                            <constraint firstAttribute="trailing" secondItem="Ha9-MB-2CQ" secondAttribute="trailing" id="ViE-gz-p0i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5QL-Up-JDO" secondAttribute="trailing" constant="20" id="Yyx-C3-eqj"/>
+                            <constraint firstItem="ezq-KL-sPg" firstAttribute="top" secondItem="Ha9-MB-2CQ" secondAttribute="bottom" id="fLD-eO-O49"/>
+                            <constraint firstItem="5QL-Up-JDO" firstAttribute="centerY" secondItem="Ha9-MB-2CQ" secondAttribute="centerY" id="nO6-0e-o1H"/>
+                            <constraint firstItem="Ha9-MB-2CQ" firstAttribute="leading" secondItem="Xax-Mj-b6I" secondAttribute="leading" id="sFi-2Y-8hh"/>
+                            <constraint firstItem="bCl-Lf-Bag" firstAttribute="top" secondItem="qUa-21-eie" secondAttribute="bottom" id="uiX-Ep-WcJ"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="chatTableView" destination="bCl-Lf-Bag" id="c4d-A5-Akg"/>
+                        <outlet property="messageInputTextView" destination="5QL-Up-JDO" id="Taj-GQ-HhU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TaY-9D-E5W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1430" y="11"/>
         </scene>
         <!--Browser View Controller-->
         <scene sceneID="PNr-CH-a4l">
