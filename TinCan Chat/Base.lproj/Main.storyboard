@@ -307,7 +307,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2OL-UF-SSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="-303"/>
+            <point key="canvasLocation" x="976" y="-298"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="6Xy-0h-5Zq">
@@ -463,13 +463,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axb-fU-na5">
-                                <rect key="frame" x="114.5" y="79" width="91" height="21"/>
+                                <rect key="frame" x="114" y="79" width="91" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZWM-vi-adh">
-                                <rect key="frame" x="215.5" y="79" width="20" height="20"/>
+                                <rect key="frame" x="215" y="79" width="20" height="20"/>
                             </activityIndicatorView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXS-OM-uat">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
@@ -528,20 +528,45 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is your wifi or bluetooth turned on? They work as the &quot;String&quot; in TinCan Chat" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzK-Bm-SMm">
+                                <rect key="frame" x="50" y="474" width="260" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="y9F-5S-6Uh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTD-h1-AQb">
+                                <rect key="frame" x="-108" y="524" width="74" height="39"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoticeMark" translatesAutoresizingMaskIntoConstraints="NO" id="Rm4-61-Ao0">
+                                <rect key="frame" x="15" y="484" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Cgd-b5-MdM"/>
+                                    <constraint firstAttribute="width" constant="30" id="cr6-X6-rkn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ZWM-vi-adh" firstAttribute="top" secondItem="axb-fU-na5" secondAttribute="top" id="0uC-N3-CZe"/>
+                            <constraint firstItem="DzK-Bm-SMm" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leading" constant="50" id="7ga-46-hoI"/>
                             <constraint firstItem="3Ib-Lh-TRV" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leadingMargin" id="FzW-Nq-L6j"/>
+                            <constraint firstItem="DzK-Bm-SMm" firstAttribute="leading" secondItem="Rm4-61-Ao0" secondAttribute="trailing" constant="5" id="G78-M3-KO0"/>
                             <constraint firstItem="axb-fU-na5" firstAttribute="centerX" secondItem="Lyn-rf-0tb" secondAttribute="centerX" id="IAe-cO-06Z"/>
                             <constraint firstItem="3Ib-Lh-TRV" firstAttribute="top" secondItem="uKU-jY-xZZ" secondAttribute="bottom" constant="100" id="OOJ-dV-MHT"/>
                             <constraint firstItem="3Ib-Lh-TRV" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leading" id="QTx-Po-Kcv"/>
+                            <constraint firstItem="sXS-OM-uat" firstAttribute="top" secondItem="DzK-Bm-SMm" secondAttribute="bottom" id="Sgt-DE-ZIC"/>
                             <constraint firstItem="ZWM-vi-adh" firstAttribute="leading" secondItem="axb-fU-na5" secondAttribute="trailing" constant="10" id="Z9W-Rn-GUf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ib-Lh-TRV" secondAttribute="trailing" id="aYf-cc-X2n"/>
+                            <constraint firstAttribute="trailing" secondItem="DzK-Bm-SMm" secondAttribute="trailing" constant="10" id="b1u-xs-h5S"/>
                             <constraint firstAttribute="trailing" secondItem="3Ib-Lh-TRV" secondAttribute="trailing" id="gmG-VT-MDT"/>
                             <constraint firstItem="e6t-v3-fwE" firstAttribute="top" secondItem="3Ib-Lh-TRV" secondAttribute="bottom" constant="50" id="jpj-mQ-9q5"/>
+                            <constraint firstItem="DzK-Bm-SMm" firstAttribute="top" secondItem="3Ib-Lh-TRV" secondAttribute="bottom" id="mC9-oA-MDu"/>
                             <constraint firstAttribute="trailing" secondItem="sXS-OM-uat" secondAttribute="trailing" id="ool-lL-EjB"/>
                             <constraint firstItem="3Ib-Lh-TRV" firstAttribute="top" secondItem="axb-fU-na5" secondAttribute="bottom" constant="20" id="s1S-al-1sS"/>
+                            <constraint firstItem="Rm4-61-Ao0" firstAttribute="centerY" secondItem="DzK-Bm-SMm" secondAttribute="centerY" id="vAe-yv-isk"/>
                             <constraint firstItem="sXS-OM-uat" firstAttribute="leading" secondItem="Lyn-rf-0tb" secondAttribute="leading" id="vBN-G3-n1i"/>
                             <constraint firstItem="sXS-OM-uat" firstAttribute="top" secondItem="3Ib-Lh-TRV" secondAttribute="bottom" constant="50" id="vKM-bo-bS4"/>
                             <constraint firstItem="e6t-v3-fwE" firstAttribute="top" secondItem="sXS-OM-uat" secondAttribute="bottom" id="woi-RQ-qzO"/>
@@ -550,6 +575,7 @@
                             <mask key="constraints">
                                 <exclude reference="FzW-Nq-L6j"/>
                                 <exclude reference="aYf-cc-X2n"/>
+                                <exclude reference="vKM-bo-bS4"/>
                                 <exclude reference="jpj-mQ-9q5"/>
                             </mask>
                         </variation>
@@ -590,6 +616,7 @@
     <resources>
         <image name="ChatTabIcon" width="25" height="25"/>
         <image name="DeleteLink" width="22" height="22"/>
+        <image name="NoticeMark" width="30" height="30"/>
         <image name="Search" width="22" height="22"/>
         <image name="SettingTabIcon" width="25" height="25"/>
         <image name="userDefaultIcon" width="180" height="180"/>
