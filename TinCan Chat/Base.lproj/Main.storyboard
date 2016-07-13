@@ -450,6 +450,25 @@
             </objects>
             <point key="canvasLocation" x="1430" y="11"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="U1w-eO-s1E">
+            <objects>
+                <viewController storyboardIdentifier="JSQChatViewController" id="JTP-PI-yvg" customClass="JSQChatViewController" customModule="TinCan_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1mG-qL-ZhU"/>
+                        <viewControllerLayoutGuide type="bottom" id="1vA-bl-9nm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fVv-uD-zvp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E56-Py-azk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1804" y="11"/>
+        </scene>
         <!--Browser View Controller-->
         <scene sceneID="PNr-CH-a4l">
             <objects>
@@ -619,6 +638,6 @@
         <image name="NoticeMark" width="30" height="30"/>
         <image name="Search" width="22" height="22"/>
         <image name="SettingTabIcon" width="25" height="25"/>
-        <image name="userDefaultIcon" width="180" height="180"/>
+        <image name="userDefaultIcon" width="60" height="60"/>
     </resources>
 </document>

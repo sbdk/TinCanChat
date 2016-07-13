@@ -20,6 +20,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
     var temporaryContext: NSManagedObjectContext!
     var soundEffectOn: Bool!
     var vibrationEffectOn: Bool!
+    var localChatName: String!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,6 +29,11 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         //Check sound and vibration effect status
         soundEffectOn = defaults.valueForKey("soundSwitchStatus") as? Bool ?? true
         vibrationEffectOn = defaults.valueForKey("vibrationSwitchStatus") as? Bool ?? true
+        if let customChatID = self.defaults.valueForKey("customChatID") as? String {
+            self.localChatName = customChatID
+        } else {
+            self.localChatName = UIDevice.currentDevice().name
+        }
     }
     
     override func viewDidLoad() {
@@ -135,13 +141,19 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         defaults.setValue(nil, forKey: selectedPeer.peerName)
         
         //Prepare and present the ChatViewController
-        let controller = storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("JSQChatViewController") as! JSQChatViewController
+        
+        controller.senderId = "self"
+        controller.senderDisplayName = localChatName
+        controller.tabBarController?.tabBar.hidden = true
         controller.chatPeer = selectedPeer
-        if appDelegate.mcManager.connectedPeers.containsObject(selectedPeer.peerID){
-            controller.readOnly = false
-        } else {
-            controller.readOnly = true
-        }
+//        controller.chatPeer = selectedPeer
+//        if appDelegate.mcManager.connectedPeers.containsObject(selectedPeer.peerID){
+//            controller.readOnly = false
+//        } else {
+//            controller.readOnly = true
+//        }
+//        self.presentViewController(controller, animated: true, completion: nil)
         navigationController?.pushViewController(controller, animated: true)
     }
     
