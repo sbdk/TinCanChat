@@ -11,7 +11,7 @@ import CoreData
 import MultipeerConnectivity
 import JSQMessagesViewController
 
-class JSQChatViewController: JSQMessagesViewController {
+class JSQChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -20,15 +20,19 @@ class JSQChatViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
+    var readOnly: Bool = false
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.hidden = true
+        if readOnly{
+            navigationItem.rightBarButtonItem?.enabled = false
+        } else {
+        }
         
         let fetchRequest = NSFetchRequest(entityName: "ChatMessage")
         fetchRequest.predicate = NSPredicate(format: "messagePeer == %@", self.chatPeer)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "messageTime", ascending: true)]
-        
         do {
             fetchedMessages = try sharedContext.executeFetchRequest(fetchRequest) as! [ChatMessage]
         } catch {
@@ -46,6 +50,9 @@ class JSQChatViewController: JSQMessagesViewController {
         setupBubbles()
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        
+        let endChatButton = UIBarButtonItem(image: UIImage(named: "NoChat"), style: .Plain, target: self, action: #selector(JSQChatViewController.endChat(_:)))
+        navigationItem.rightBarButtonItem = endChatButton
         
         navigationItem.title = chatPeer.peerName
         
@@ -133,7 +140,16 @@ class JSQChatViewController: JSQMessagesViewController {
         }
         else{
             print("Could not send data")
+            ConvenientView.sharedInstance().showAlertView("Error", message: "the other party is not connected, message can't be send", hostView: self)
         }
+    }
+    
+    override func didPressAccessoryButton(sender: UIButton!) {
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+//        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+//        
+//        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func handleMCReceivedDataWithNotification(notification: NSNotification){
@@ -150,7 +166,7 @@ class JSQChatViewController: JSQMessagesViewController {
         if let message = dataDictionary["message"] {
             
             // Make sure that the message is other than "_end_chat_".
-            if message != "chat is ended by the other party"{
+            if message != "This chat is ended"{
                 
                 dispatch_async(dispatch_get_main_queue()){
                     self.addMessage(fromPeer.displayName, text: message)
@@ -161,7 +177,7 @@ class JSQChatViewController: JSQMessagesViewController {
             else{
                 //in this case, only post the last message
                 dispatch_async(dispatch_get_main_queue()){
-                    self.addMessage("", text: "Chat is ended by the other party")
+                    self.addMessage(fromPeer.displayName, text: "This chat is ended")
                     JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
                     self.finishReceivingMessage()
                 }
@@ -179,6 +195,15 @@ class JSQChatViewController: JSQMessagesViewController {
                 alterView.addAction(okAction)
                 self.presentViewController(alterView, animated: true, completion: nil)
             }
+        }
+    }
+    
+    //Implemente the endChat function for the endChatButton
+    func endChat(sender: AnyObject){
+        print("end chat")
+        let messageDictionary: [String: String] = ["message": "This chat is ended"]
+        if appDelegate.mcManager.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
+            appDelegate.mcManager.session.cancelConnectPeer(chatPeer.peerID)
         }
     }
     

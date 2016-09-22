@@ -147,13 +147,13 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         controller.senderDisplayName = localChatName
         controller.tabBarController?.tabBar.hidden = true
         controller.chatPeer = selectedPeer
-//        controller.chatPeer = selectedPeer
-//        if appDelegate.mcManager.connectedPeers.containsObject(selectedPeer.peerID){
-//            controller.readOnly = false
-//        } else {
-//            controller.readOnly = true
-//        }
-//        self.presentViewController(controller, animated: true, completion: nil)
+
+        if appDelegate.mcManager.connectedPeers.containsObject(selectedPeer.peerID){
+            controller.readOnly = false
+        } else {
+            controller.readOnly = true
+        }
+
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -303,7 +303,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
         if let message = dataDictionary["message"] {
             
             // Make sure that the message is other than "_end_chat_".
-            if message != "chat is ended by the other party"{
+            if message != "This chat is ended"{
                 
                 dispatch_async(dispatch_get_main_queue()){
                     let receivedMessage = ChatMessage(sender: fromPeer.displayName, body: message, context: self.sharedContext)
@@ -315,7 +315,7 @@ class ChatRecordViewController: UITableViewController, MCManagerInvitationDelega
             else{
                 //in this case, only post the last message
                 dispatch_async(dispatch_get_main_queue()){
-                    let receivedMessage = ChatMessage(sender: nil, body: message, context: self.sharedContext)
+                    let receivedMessage = ChatMessage(sender: fromPeer.displayName, body: message, context: self.sharedContext)
                     receivedMessage.messagePeer = sourcePeer
                     self.sharedContext.insertObject(receivedMessage)
                     CoreDataStackManager.sharedInstance().saveContext()
