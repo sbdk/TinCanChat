@@ -12,11 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mcManager: MCManager!
+//    var mcManager: MCManager!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        mcManager = MCManager()
+        MCManager.sharedInstance
         return true
     }
 

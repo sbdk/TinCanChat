@@ -6,6 +6,8 @@ use_frameworks!
 target 'TinCan Chat' do
 
 pod 'JSQMessagesViewController'
+pod 'Parse'
+pod 'ParseUI'
 
 end
 

@@ -123,7 +123,7 @@ class JSQChatViewController: JSQMessagesViewController, UIImagePickerControllerD
         
         //First send out this message dictionary to connected peer
         let messageDictionary: [String: String] = ["message": text]
-        if appDelegate.mcManager.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
+        if MCManager.sharedInstance.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
             
             //first add new sent message into JSQMessage array
             addMessage("self", text: text)
@@ -202,8 +202,8 @@ class JSQChatViewController: JSQMessagesViewController, UIImagePickerControllerD
     func endChat(sender: AnyObject){
         print("end chat")
         let messageDictionary: [String: String] = ["message": "This chat is ended"]
-        if appDelegate.mcManager.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
-            appDelegate.mcManager.session.cancelConnectPeer(chatPeer.peerID)
+        if MCManager.sharedInstance.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
+            MCManager.sharedInstance.session.cancelConnectPeer(chatPeer.peerID)
         }
     }
     

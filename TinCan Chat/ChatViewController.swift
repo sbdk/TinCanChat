@@ -164,7 +164,7 @@ class ChatViewController: UIViewController, UITextViewDelegate, UITableViewDeleg
         if text == "\n"{
             //First send out this message dictionary to connected peer
             let messageDictionary: [String: String] = ["message": (messageInputTextView?.text)!]
-            if appDelegate.mcManager.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
+            if MCManager.sharedInstance.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
                 //After message send out, store the sent message into CoreData
                 dispatch_async(dispatch_get_main_queue()){
                     let sentMessage = ChatMessage(sender: "self", body: messageDictionary["message"]!, context: self.sharedContext)
@@ -192,8 +192,8 @@ class ChatViewController: UIViewController, UITextViewDelegate, UITableViewDeleg
     func endChat(sender: AnyObject){
         print("end chat")
         let messageDictionary: [String: String] = ["message": "chat is ended by the other party"]
-        if appDelegate.mcManager.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
-            appDelegate.mcManager.session.cancelConnectPeer(chatPeer.peerID)
+        if MCManager.sharedInstance.sendData(dictionaryWithData: messageDictionary, toPeer: chatPeer.peerID){
+            MCManager.sharedInstance.session.cancelConnectPeer(chatPeer.peerID)
         }
     }
     
