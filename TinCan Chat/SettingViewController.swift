@@ -50,7 +50,7 @@ class SettingViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if appDelegate.mcManager.connectedPeers.count == 0 {
+        if MCManager.sharedInstance.connectedPeers.count == 0 {
             chatIDTextField.enabled = true
         } else {
             chatIDTextField.enabled = false
@@ -60,9 +60,9 @@ class SettingViewController: UITableViewController, UITextFieldDelegate {
 
     @IBAction func toggleVisibility(sender: AnyObject) {
         if  visibilitySwitch.on {
-            appDelegate.mcManager.advertiser.startAdvertisingPeer()
+            MCManager.sharedInstance.advertiser.startAdvertisingPeer()
         } else {
-            appDelegate.mcManager.advertiser.stopAdvertisingPeer()
+            MCManager.sharedInstance.advertiser.stopAdvertisingPeer()
         }
         //Whenever user changed the status of visibleSwitch, save new stauts into UserDefaults to preserve this change
         defaults.setObject(visibilitySwitch.on, forKey: "switchStatus")
@@ -94,18 +94,14 @@ class SettingViewController: UITableViewController, UITextFieldDelegate {
         
         //If MCManger advertiser is on, first stop it and then reset it, since user will use a new ChatID to advitise with
         if visibilitySwitch.on {
-            appDelegate.mcManager.advertiser.stopAdvertisingPeer()
+            MCManager.sharedInstance.advertiser.stopAdvertisingPeer()
         }
-        appDelegate.mcManager.advertiser = nil
-        
-        //Upon user hit return key, reset peerID and session using the new ChatID
-        appDelegate.mcManager.peerID = nil
-        appDelegate.mcManager.session = nil
-        appDelegate.mcManager.setupPeerAndSessionWithDisplayName(resetDeviceName)
+        MCManager.sharedInstance.advertiser.stopAdvertisingPeer()
+        MCManager.sharedInstance.resetSessionWithNewChatName(resetDeviceName)
         
         //After reset is done, resume advertiser if it's switch is on
         if visibilitySwitch.on {
-            appDelegate.mcManager.advertiser.startAdvertisingPeer()
+            MCManager.sharedInstance.advertiser.startAdvertisingPeer()
         }
         return true
     }
