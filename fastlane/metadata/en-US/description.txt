@@ -1,0 +1,1 @@
+TinCan Chat is a private off-grid chat app powered by peer-to-peer connection. Users can chat without internet connecting and cellular signal, just need to keep Bluetooth or wifi turned on.
