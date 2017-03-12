@@ -52,8 +52,9 @@ extension BrowserViewController {
     } else {
       cell.connectStatusLabel!.text = "request sent...😐"
       
+      print("start to connect...")
       //Sent the invitation
-      MCManager.sharedInstance.browser.invitePeer(peerID, toSession: MCManager.sharedInstance.session, withContext: nil, timeout: 10)
+      MCManager.sharedInstance.browser.invitePeer(peerID, toSession: MCManager.sharedInstance.session, withContext: nil, timeout: 20)
     }
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }

@@ -59,6 +59,7 @@ extension ChatRecordViewController {
     defaults.setValue(nil, forKey: selectedPeer.peerName)
     
     //Prepare and present the ChatViewController
+//    let controller = storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController 
     let controller = storyboard?.instantiateViewControllerWithIdentifier("JSQChatViewController") as! JSQChatViewController
     controller.senderId = "self"
     controller.senderDisplayName = localChatName

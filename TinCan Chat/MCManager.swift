@@ -32,7 +32,7 @@ class MCManager: NSObject, MCSessionDelegate {
   
   override init(){
     peerID = MCPeerID(displayName: UIDevice.currentDevice().name) //use device name to set default peerID
-    session = MCSession(peer: peerID)
+    session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .None)
     browser = MCNearbyServiceBrowser(peer: peerID, serviceType: "TinCanChat")
     advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "TinCanChat")
     super.init()
@@ -42,7 +42,7 @@ class MCManager: NSObject, MCSessionDelegate {
   //Method for resetting session with a new Chat name
   func resetSessionWithNewChatName(name: String){
     peerID = MCPeerID(displayName: name)
-    session = MCSession(peer: peerID)
+    session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .None)
     session.delegate = self
     browser = MCNearbyServiceBrowser(peer: peerID, serviceType: "TinCanChat")
     advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "TinCanChat")

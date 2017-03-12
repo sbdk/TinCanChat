@@ -13,6 +13,7 @@
 # Update this, if you use features of a newer version
 fastlane_version "2.19.3"
 
+
 default_platform :ios
 
 platform :ios do
@@ -31,7 +32,8 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
     # match(type: "appstore") # more information: https://codesigning.guide
-    gym(scheme: "TinCan Chat") # Build your app - more options available
+    gym(scheme: "TinCan Chat”, workspace: “TinCan Chat.xcworkspace”, include_bitcode: true) # Build your app - more options available
+    
     pilot
 
     # sh "your_script.sh"

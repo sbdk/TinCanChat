@@ -182,22 +182,13 @@
 			isa = PBXGroup;
 			children = (
 				BEC061C81D939E5F0061774B /* Model */,
-				BEB77CC51D0B74F600281E21 /* AppDelegate.swift */,
+				BEC155B21E74DEB200A587AA /* View */,
+				BEC155B11E74DE8600A587AA /* Controller */,
 				BEB77CCB1D0B74F600281E21 /* Main.storyboard */,
 				BEB77CD01D0B74F600281E21 /* LaunchScreen.storyboard */,
 				BEB77CD31D0B74F600281E21 /* Info.plist */,
 				BEB77CCE1D0B74F600281E21 /* Assets.xcassets */,
-				BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */,
-				BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */,
-				BE9B645F1DAEF902009739EE /* BrowserTableExtension.swift */,
-				BE83D8481D0F59E200C4532B /* ChatViewController.swift */,
-				BEEF60BA1D1CBB9E0094AF49 /* JSQChatViewController.swift */,
-				BE83D84E1D0F62C300C4532B /* KeyboardConfig.swift */,
 				BE62AE091D10CB8000C33FE7 /* CustomCell */,
-				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
-				BE45354D1D0E77090042E28D /* ConvenientView.swift */,
-				BE4F0AED1DADA85A002027D0 /* InvitationView.xib */,
-				BE4F0AEF1DADA88A002027D0 /* InvitationView.swift */,
 			);
 			path = "TinCan Chat";
 			sourceTree = "<group>";
@@ -234,14 +225,39 @@
 		BEC061C81D939E5F0061774B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BE9B645B1DAEE274009739EE /* ChatRecordTableViewExtension.swift */,
-				BE9B64591DAED702009739EE /* ChatRecordCoreDataExtension.swift */,
 				BEB8E3AA1D0D1A1700ED0A15 /* CoreData */,
+				BEB77CC51D0B74F600281E21 /* AppDelegate.swift */,
 				BEB8E3B41D0D1FF700ED0A15 /* MCManager.swift */,
 				BE4F0AEB1DAD876F002027D0 /* MCMangerExtension.swift */,
 				BEA682EF1DB734D4009CA81E /* MCStoredValue.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		BEC155B11E74DE8600A587AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BEB8E3A41D0D168E00ED0A15 /* ChatRecordViewController.swift */,
+				BE9B645B1DAEE274009739EE /* ChatRecordTableViewExtension.swift */,
+				BE9B64591DAED702009739EE /* ChatRecordCoreDataExtension.swift */,
+				BEB8E3A61D0D187F00ED0A15 /* BrowserViewController.swift */,
+				BE9B645F1DAEF902009739EE /* BrowserTableExtension.swift */,
+				BE83D8481D0F59E200C4532B /* ChatViewController.swift */,
+				BEEF60BA1D1CBB9E0094AF49 /* JSQChatViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		BEC155B21E74DEB200A587AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BE83D84E1D0F62C300C4532B /* KeyboardConfig.swift */,
+				BE277BE11D0B780D00288067 /* SettingViewController.swift */,
+				BE45354D1D0E77090042E28D /* ConvenientView.swift */,
+				BE4F0AED1DADA85A002027D0 /* InvitationView.xib */,
+				BE4F0AEF1DADA88A002027D0 /* InvitationView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
