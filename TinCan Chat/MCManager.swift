@@ -9,11 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
-enum MCManagerSessionNotifications: String {
-  case connectingWithPeer
-  case connectedWithPeer
-  case notConnectedWithPeer
-  case receivedData
+enum MCManagerNotifications: String {
+  case connectingWithPeer = "connectingWithPeer"
+  case connectedWithPeer = "connectedWithPeer"
+  case notConnectedWithPeer = "notConnectedWithPeer"
+  case receivedData = "receivedMCDataNotification"
 }
 
 class MCManager: NSObject, MCSessionDelegate {

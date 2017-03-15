@@ -55,9 +55,9 @@ class JSQChatViewController: JSQMessagesViewController, UIImagePickerControllerD
         navigationItem.rightBarButtonItem = endChatButton
         
         navigationItem.title = chatPeer.peerName
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JSQChatViewController.handleMCReceivedDataWithNotification(_:)), name: "receivedMCDataNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JSQChatViewController.handleLostConnection(_:)), name: "lostConnectionWithPeer", object: nil)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleMCReceivedDataWithNotification(_:)), name: MCManagerNotifications.receivedData.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleLostConnection(_:)), name: MCManagerNotifications.notConnectedWithPeer.rawValue, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

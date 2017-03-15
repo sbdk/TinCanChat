@@ -43,18 +43,18 @@ class BrowserViewController: UIViewController, UITableViewDataSource, UITableVie
       MCManager.sharedInstance.browser.delegate = self
       MCManager.sharedInstance.browser.startBrowsingForPeers()
       
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BrowserViewController.connectingWithPeer(_:)), name: MCManagerSessionNotifications.connectingWithPeer.rawValue, object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BrowserViewController.connectedWithPeer(_:)), name: MCManagerSessionNotifications.connectedWithPeer.rawValue, object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BrowserViewController.notConnectedWithPeer(_:)), name: MCManagerSessionNotifications.notConnectedWithPeer.rawValue, object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BrowserViewController.connectingWithPeer(_:)), name: MCManagerNotifications.connectingWithPeer.rawValue, object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BrowserViewController.connectedWithPeer(_:)), name: MCManagerNotifications.connectedWithPeer.rawValue, object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BrowserViewController.notConnectedWithPeer(_:)), name: MCManagerNotifications.notConnectedWithPeer.rawValue, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
       super.viewWillDisappear(animated)
       MCManager.sharedInstance.foundPeers.removeAll()
       MCManager.sharedInstance.browser.stopBrowsingForPeers()
-      NSNotificationCenter.defaultCenter().removeObserver(self, name: MCManagerSessionNotifications.connectingWithPeer.rawValue, object: nil)
-      NSNotificationCenter.defaultCenter().removeObserver(self, name: MCManagerSessionNotifications.connectedWithPeer.rawValue, object: nil)
-      NSNotificationCenter.defaultCenter().removeObserver(self, name: MCManagerSessionNotifications.notConnectedWithPeer.rawValue, object: nil)
+      NSNotificationCenter.defaultCenter().removeObserver(self, name: MCManagerNotifications.connectingWithPeer.rawValue, object: nil)
+      NSNotificationCenter.defaultCenter().removeObserver(self, name: MCManagerNotifications.connectedWithPeer.rawValue, object: nil)
+      NSNotificationCenter.defaultCenter().removeObserver(self, name: MCManagerNotifications.notConnectedWithPeer.rawValue, object: nil)
     }
   
   //implemente delegate methods for browser

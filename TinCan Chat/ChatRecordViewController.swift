@@ -87,10 +87,10 @@ class ChatRecordViewController: UITableViewController, MCNearbyServiceAdvertiser
           
             MCManager.sharedInstance.advertiser.delegate = self
             //Make this viewController listen to lostConnection notification and successConnection notification
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ChatRecordViewController.handleLostConnection(_:)), name: MCManagerSessionNotifications.notConnectedWithPeer.rawValue, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ChatRecordViewController.handleSuccessConnection(_:)), name: MCManagerSessionNotifications.connectedWithPeer.rawValue, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ChatRecordViewController.handleLostConnection(_:)), name: MCManagerNotifications.notConnectedWithPeer.rawValue, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ChatRecordViewController.handleSuccessConnection(_:)), name: MCManagerNotifications.connectedWithPeer.rawValue, object: nil)
             //Make this viewController listen to receive message notification
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ChatRecordViewController.handleMCReceivedDataWithNotification(_:)), name: MCManagerSessionNotifications.receivedData.rawValue, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ChatRecordViewController.handleMCReceivedDataWithNotification(_:)), name: MCManagerNotifications.receivedData.rawValue, object: nil)
         }
     }
   

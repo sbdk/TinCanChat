@@ -19,16 +19,16 @@ extension MCManager {
     switch state {
       case .Connecting:
         print("Connecting to session")
-        NSNotificationCenter.defaultCenter().postNotificationName(MCManagerSessionNotifications.connectingWithPeer.rawValue, object: peerID)
+        NSNotificationCenter.defaultCenter().postNotificationName(MCManagerNotifications.connectingWithPeer.rawValue, object: peerID)
       case .Connected:
         print("Connected to session")
         MCManager.sharedInstance.connectedPeers.append(peerID)
-        NSNotificationCenter.defaultCenter().postNotificationName(MCManagerSessionNotifications.connectedWithPeer.rawValue, object: peerID)
+        NSNotificationCenter.defaultCenter().postNotificationName(MCManagerNotifications.connectedWithPeer.rawValue, object: peerID)
       case .NotConnected:
         print("Did not connect to session")
         if let index = MCManager.sharedInstance.connectedPeers.indexOf(peerID) {
           MCManager.sharedInstance.connectedPeers.removeAtIndex(index) //frist remove the peerID from temp connectedPeers array
-          NSNotificationCenter.defaultCenter().postNotificationName(MCManagerSessionNotifications.notConnectedWithPeer.rawValue, object: peerID)
+          NSNotificationCenter.defaultCenter().postNotificationName(MCManagerNotifications.notConnectedWithPeer.rawValue, object: peerID)
         } else {
           print("peer is already disconnected")
           return
@@ -47,7 +47,7 @@ extension MCManager {
   func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
     //for every received data, use a dictionary to store received data and sender's MCPeerID
     let dictionary:[String:AnyObject] = ["data": data, "fromPeer": peerID]
-    NSNotificationCenter.defaultCenter().postNotificationName(MCManagerSessionNotifications.receivedData.rawValue, object: dictionary)
+    NSNotificationCenter.defaultCenter().postNotificationName(MCManagerNotifications.receivedData.rawValue, object: dictionary)
   }
   
   func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
